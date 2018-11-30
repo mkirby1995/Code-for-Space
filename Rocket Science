@@ -1,0 +1,64 @@
+
+def mass_ratio_of_vehicle(initial_mass, mass_after_op):
+    return mass_after_op / initial_mass
+
+def mass_ratio_of_rocket(mass_after_op, payload, initial_mass):
+    final_mass = mass_after_op - payload
+    initial_mass = initial_mass - payload
+    return final_mass / initial_mass
+
+def propellant_mass_fraction(initial_mass, payload, mass_after_op):
+    final_mass = mass_after_op - payload
+    initial_mass = initial_mass - payload
+    return((initial_mass - final_mass) / initial_mass)
+
+def propellant_mass(initial_mass, mass_after_op):
+    return initial_mass - mass_after_op
+
+def propellant_mass_flow_rate(initial_mass, operating_duration):
+    return initial_mass / operating_duration
+
+def thrust(average_spi, propellant_mass_flow_rate):
+    A = (70,3)
+    G = 9.81
+    return(average_spi*G*A)
+
+def thrust_to_weight_ratio(initial_mass):
+    G = 9.81
+    return(thrust(240) / (initial_mass*G))
+    
+def max_acceleration(): 
+    G = 9.81
+    return(thrust_to_weight_ratio(130)*G)
+
+def effective_exhaust_velocity(spi): 
+    G = 9.81
+    return(G*spi)
+    
+def total_impulse():
+    G = 9.81
+    
+    
+#def impulse_to_weight_ratio():      
+    
+print("Mass ratio of vehicle =", mass_ratio_of_vehicle(200, 130)*100, "%")
+
+print("Mass ratio of rocket =", mass_ratio_of_rocket(130, 110, 200)*100, "%")
+
+print("Propellant mass fraction =", propellant_mass_fraction(200, 110, 130)*100, "%")
+
+print("Propellant mass =", propellant_mass(200, 130), "Kg")
+
+print("The rocket has a propellant mass flow rate of", propellant_mass_flow_rate(70, 3), "Kg/sec.")
+
+print("The rocket will produce", thrust(240), "N of thrust.")
+
+print("Thrust-to-weight ratio =", thrust_to_weight_ratio(200))
+
+print(max_acceleration())
+
+print(effective_exhaust_velocity(240))
+
+
+
+
