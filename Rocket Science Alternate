@@ -1,0 +1,47 @@
+# rocket script
+
+def rocket(initial_mass, mass_after_operation, payload, operating_duration, average_specific_impulse_of_propellant):
+    G = 9.81
+    
+    initial_mass_of_propulsion_system = initial_mass - payload
+    
+    empty_propulsion_system_mass = mass_after_operation - payload
+    
+    mass_ratio_of_vehicle = mass_after_operation / initial_mass
+    
+    mass_ratio_of_rocket = empty_propulsion_system_mass / initial_mass_of_propulsion_system
+    
+    propellant_mass = initial_mass - mass_after_operation
+    
+    propellant_mass_fraction = (initial_mass_of_propulsion_system - empty_propulsion_system_mass) / initial_mass_of_propulsion_system
+    
+    propellant_mass_flow_rate = propellant_mass / operating_duration
+    
+    thrust = propellant_mass_flow_rate * G * average_specific_impulse_of_propellant
+    
+    initial_thrust_to_weight_ratio = thrust / (initial_mass * G)
+    
+    final_thrust_to_weight_ratio = thrust / (mass_after_operation * G)
+    
+    max_acceleration = final_thrust_to_weight_ratio * G
+    
+    effective_exhaust_velocity = average_specific_impulse_of_propellant * G
+    
+    total_impulse = propellant_mass * effective_exhaust_velocity
+    
+    impulse_to_weight_ratio = total_impulse / (initial_mass_of_propulsion_system * G)
+    
+    return { print("Vehicle mass ratio:", mass_ratio_of_vehicle, "%"), 
+        print("Rocket mass ratio:", mass_ratio_of_rocket*100, "%"), 
+        print("Vehicle propellant mass:",propellant_mass, "Kg"), 
+        print("Rocket propellant mass fraction:",propellant_mass_fraction*100, "%"),
+        print("Propellant mass flow rate:", propellant_mass_flow_rate, "Kg/sec"),
+        print("Thrust:", thrust, "N"),
+        print("Thrust-to-weight ratio: Initial", initial_thrust_to_weight_ratio, "Final", final_thrust_to_weight_ratio),
+        print("Maximum acceleration:", max_acceleration, "M/sec2"),
+        print("Effective exhaust velocity:", effective_exhaust_velocity, "M/sec"),
+        print("Total impulse:", total_impulse, "N-sec"),
+        print("Impulse-to-weight ratio:", impulse_to_weight_ratio)} 
+
+
+print(rocket(30000, 10000, 500, 60, 365))
